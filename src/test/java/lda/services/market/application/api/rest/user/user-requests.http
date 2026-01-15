@@ -1,0 +1,15 @@
+###
+GET http://localhost:8080/user/08e8ff8c-9646-4133-b193-bc8887ccf91d
+
+###
+POST http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "name": "toto",
+  "email": "toto@mail.com"
+}
+
+###
+GET http://localhost:8080/user
+Content-Type: application/json
