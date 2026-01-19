@@ -3,3 +3,5 @@ databaseChangeLog:
       file: db/changelog/product/db.changelog-product.yaml
   - include:
       file: db/changelog/user/db.changelog-user.yaml
+  - include:
+      file: db/changelog/auth_user/db.changelog-auth-user.yaml
