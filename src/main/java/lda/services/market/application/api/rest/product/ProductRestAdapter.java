@@ -4,12 +4,15 @@ import lda.services.market.application.api.rest.product.mapper.ProductRestMapper
 import lda.services.market.application.api.rest.product.model.ProductCreateRequest;
 import lda.services.market.application.api.rest.product.model.ProductDetalResponse;
 import lda.services.market.application.api.rest.product.model.ProductResponse;
+import lda.services.market.domain.product.exception.ProductNotFoundException;
 import lda.services.market.domain.product.port.ProductInput;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -44,6 +47,12 @@ public class ProductRestAdapter {
         return mapper.toProductDetailResponse(
                 productInput.retrieveById(uuid)
         );
+    }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Map<String, String> handleNotFound(ProductNotFoundException ex) {
+        return Map.of("message", ex.getMessage());
     }
 
 }
