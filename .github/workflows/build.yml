@@ -33,9 +33,15 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Set short SHA
+        run: echo "SHORT_SHA=${GITHUB_SHA::7}" >> $GITHUB_ENV
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: user/app:latest
+          tags: |
+            ${{ vars.DOCKERHUB_USERNAME }}/spring-app-backend:latest
+            ${{ vars.DOCKERHUB_USERNAME }}/spring-app-backend:${{ env.SHORT_SHA }}
+            
