@@ -3,7 +3,9 @@ package lda.services.market.infra.persistence.product;
 import lda.services.market.domain.product.model.Product;
 import lda.services.market.domain.product.port.ProductOutput;
 import lda.services.market.infra.persistence.product.mapper.ProductPersistenceMapper;
+import lda.services.market.infra.persistence.product.mapper.TagPersistenceMapper;
 import lda.services.market.infra.persistence.product.repository.ProductRepository;
+import lda.services.market.infra.persistence.product.repository.TagRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,26 +18,30 @@ import java.util.UUID;
 @Component
 public class ProductPersistenceAdapter implements ProductOutput {
 
-    private final ProductRepository repository;
-    private final ProductPersistenceMapper mapper;
+    private final ProductRepository productRepository;
+    private final ProductPersistenceMapper productMapper;
+
+    // Tag
+    private final TagRepository tagRepository;
+    private final TagPersistenceMapper tagMapper;
 
     @Override
     public Page<Product> getByPage(Pageable page) {
-        return repository.findAll(page)
-                .map(mapper::toDomain);
+        return productRepository.findAll(page)
+                .map(productMapper::toDomain);
     }
 
     @Override
     public Optional<Product> getById(UUID id) {
-        return repository.findById(id)
-                .map(mapper::toDomain);
+        return productRepository.findById(id)
+                .map(productMapper::toDomain);
     }
 
     @Override
     public Product save(Product product) {
-        final var entity = mapper.toEntity(product);
-        return mapper.toDomain(
-                repository.save(entity)
+        final var entity = productMapper.toEntity(product);
+        return productMapper.toDomain(
+                productRepository.save(entity)
         );
     }
 }
