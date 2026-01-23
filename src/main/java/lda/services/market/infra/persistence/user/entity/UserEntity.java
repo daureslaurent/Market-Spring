@@ -2,8 +2,6 @@ package lda.services.market.infra.persistence.user.entity;
 
 
 import jakarta.persistence.*;
-import lda.services.market.infra.persistence.cart.entity.CartEntity;
-import lda.services.market.infra.persistence.order.entity.OrderEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,10 +27,7 @@ public class UserEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "cart_id")
-    private CartEntity cart;
+    private UUID cartId;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderEntity> orders = new ArrayList<>();
+    private List<UUID> orders = new ArrayList<>();
 }

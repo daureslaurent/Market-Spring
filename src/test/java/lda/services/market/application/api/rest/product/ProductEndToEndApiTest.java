@@ -1,5 +1,7 @@
 package lda.services.market.application.api.rest.product;
 
+import lda.services.market.application.api.rest.product.model.ProductCreateRequest;
+import lda.services.market.application.api.rest.product.model.ProductResponse;
 import lda.services.market.infra.persistence.product.entity.ProductEntity;
 import lda.services.market.infra.persistence.product.repository.ProductRepository;
 import org.junit.jupiter.api.*;
@@ -35,6 +37,38 @@ class ProductEndToEndApiTest {
     @AfterEach
     void afterEach() {
         productRepository.deleteAll();
+    }
+
+    @Test
+    void givenNewProduct_WhenOK_ThenOk() {
+        final var productName = "My Product XY";
+        final var productDetail = "Detail of the product";
+
+        final var productPost = ProductCreateRequest.builder()
+                .name(productName)
+                .detail(productDetail)
+                .quantity(5)
+                .build();
+
+        RestTestClient client = RestTestClient
+                .bindToServer()
+                .baseUrl("http://localhost:" + port)
+                .build();
+
+        final var res = client.post().uri("/product")
+                .body(productPost)
+                .accept(MediaType.APPLICATION_JSON)
+                .exchange();
+
+        final var body = res
+                .expectStatus().isOk()
+                .returnResult(ProductResponse.class)
+                .getResponseBody();
+
+        assertThat(body).isNotNull();
+        assert body != null;
+        assertThat(body.name()).isEqualTo(productName);
+        assertThat(body.pictureId()).isNull();
     }
 
     @Test

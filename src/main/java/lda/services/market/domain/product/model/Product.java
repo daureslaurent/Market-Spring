@@ -3,13 +3,17 @@ package lda.services.market.domain.product.model;
 import lda.services.market.domain.product.exception.ProductQuantityTooSmallException;
 import lombok.Builder;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Builder(toBuilder = true)
 public record Product (
         UUID id,
         String name,
-        Integer quantity
+        String detail,
+        Integer quantity,
+        String pictureId,
+        Set<Tag> tags
 ) {
 
     public Product changeQuantity(final int quantity) {

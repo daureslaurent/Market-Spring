@@ -15,17 +15,16 @@ import java.util.UUID;
 @Data
 @Builder
 @Entity
-@Table(name = "TAG_ENTITY")
+@Table(name = "TAG")
 public class TagEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     @Column(nullable = false, unique = true)
     private String name;
 
-    // Bidirectional mapping
     @ManyToMany(mappedBy = "tags")
     private Set<ProductEntity> products = new HashSet<>();
 

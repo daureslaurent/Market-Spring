@@ -1,7 +1,6 @@
 package lda.services.market.infra.persistence.payment.entity;
 
 import jakarta.persistence.*;
-import lda.services.market.infra.persistence.order.entity.OrderEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,12 +19,11 @@ import java.util.UUID;
 public class PaymentEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "order_id", unique = true)
-    private OrderEntity order;
+    @Column(nullable = false)
+    private UUID orderId;
 
     @Column(nullable = false)
     private String provider;

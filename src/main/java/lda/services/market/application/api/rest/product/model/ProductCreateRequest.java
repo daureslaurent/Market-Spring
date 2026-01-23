@@ -5,6 +5,7 @@ import lombok.Builder;
 @Builder(toBuilder = true)
 public record ProductCreateRequest(
         String name,
+        String detail,
         Integer quantity
 ) {
 }

@@ -15,7 +15,7 @@ import java.util.UUID;
 @Table(name = "PRODUCT")
 public class ProductEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     private String name;
@@ -28,18 +28,11 @@ public class ProductEntity {
 
     private String pictureId;
 
-//    @OneToOne(
-//            mappedBy = "product",
-//            cascade = CascadeType.ALL,
-//            orphanRemoval = true
-//    )
-//    private CartItemEntity cartItems;
-
     @ManyToMany
-//    @JoinTable(
-//            name = "product_tags",
-//            joinColumns = @JoinTable(name = "product_id"),
-//            inverseJoinColumns = @JoinColumn(name = "tag_id")
-//    )
+    @JoinTable(
+            name = "product_tags",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
     private Set<TagEntity> tags = new HashSet<>();
 }
