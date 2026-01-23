@@ -42,6 +42,19 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ vars.DOCKERHUB_USERNAME }}/spring-app-backend:latest
-            ${{ vars.DOCKERHUB_USERNAME }}/spring-app-backend:${{ env.SHORT_SHA }}
-            
+            ${{ vars.DOCKERHUB_USERNAME }}/${{ github.repository }}:latest
+            ${{ vars.DOCKERHUB_USERNAME }}/${{ github.repository }}:${{ env.SHORT_SHA }}
+
+      - name: Trigger infra update
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.INFRA_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/daureslaurent/Market-Infra/dispatches \
+            -d '{
+              "event_type": "update-backend",
+              "client_payload": {
+                "image": "${{ vars.DOCKERHUB_USERNAME }}/${{ github.repository }}",
+                "tag": "${{ env.SHORT_SHA }}"
+              }
+            }'
