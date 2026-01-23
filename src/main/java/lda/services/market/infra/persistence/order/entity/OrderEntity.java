@@ -2,7 +2,6 @@ package lda.services.market.infra.persistence.order.entity;
 
 import jakarta.persistence.*;
 import lda.services.market.infra.persistence.order.OrderStatus;
-import lda.services.market.infra.persistence.user.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,12 +22,11 @@ import java.util.UUID;
 public class OrderEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+    @Column(nullable = false)
+    private UUID userId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

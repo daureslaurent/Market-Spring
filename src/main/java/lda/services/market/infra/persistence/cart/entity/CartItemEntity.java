@@ -1,7 +1,6 @@
 package lda.services.market.infra.persistence.cart.entity;
 
 import jakarta.persistence.*;
-import lda.services.market.infra.persistence.product.entity.ProductEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,9 +24,8 @@ public class CartItemEntity {
     @JoinColumn(name = "cart_id")
     private CartEntity cart;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "product_id")
-    private ProductEntity product;
+    @Column(nullable = false)
+    private UUID productId;
 
     @Column(nullable = false)
     private int quantity;

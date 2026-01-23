@@ -1,7 +1,6 @@
 package lda.services.market.infra.persistence.invoice.entity;
 
 import jakarta.persistence.*;
-import lda.services.market.infra.persistence.order.entity.OrderEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,9 +22,8 @@ public class InvoiceEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "order_id", unique = true)
-    private OrderEntity order;
+    @Column(unique = true)
+    private UUID orderId;
 
     @Column(nullable = false, unique = true)
     private String invoiceNumber;

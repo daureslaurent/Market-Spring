@@ -41,13 +41,19 @@ class ProductRestAdapterTest {
         final var productRes0 = ProductDetalResponse.builder()
                 .id(productDomain0.id())
                 .name(productDomain0.name())
+                .detail(productDomain0.detail())
                 .quantity(productDomain0.quantity())
+                .pictureId(productDomain0.pictureId())
+                .tags(productDomain0.tags())
                 .build();
         final var productDomain1 = ProductSampleTest.domain();
         final var productRes1 = ProductDetalResponse.builder()
                 .id(productDomain1.id())
                 .name(productDomain1.name())
+                .detail(productDomain1.detail())
                 .quantity(productDomain1.quantity())
+                .pictureId(productDomain1.pictureId())
+                .tags(productDomain1.tags())
                 .build();
 
         final var pageDomain = new PageImpl<>(List.of(

@@ -1,7 +1,6 @@
 package lda.services.market.infra.persistence.cart.entity;
 
 import jakarta.persistence.*;
-import lda.services.market.infra.persistence.user.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,12 +20,11 @@ import java.util.UUID;
 public class CartEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity user;
+    @Column(nullable = false, unique = true)
+    private UUID userId;
 
     @OneToMany(
             mappedBy = "cart",
