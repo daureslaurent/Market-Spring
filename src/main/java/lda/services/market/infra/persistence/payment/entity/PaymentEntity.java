@@ -26,10 +26,14 @@ public class PaymentEntity {
     private UUID orderId;
 
     @Column(nullable = false)
-    private String provider;
+    private UUID userId;
 
     @Column(nullable = false)
-    private String status;
+    private String provider;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private PaymentStatusEntity status = PaymentStatusEntity.PENDING;
 
     @Column(nullable = false)
     private BigDecimal amount;
