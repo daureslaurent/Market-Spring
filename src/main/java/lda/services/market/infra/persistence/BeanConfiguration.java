@@ -1,5 +1,7 @@
 package lda.services.market.infra.persistence;
 
+import lda.services.market.domain.payment.port.PaymentOutput;
+import lda.services.market.domain.payment.service.PaymentService;
 import lda.services.market.domain.product.port.ProductOutput;
 import lda.services.market.domain.product.service.ProductService;
 import lda.services.market.domain.user.port.UserOutput;
@@ -11,6 +13,11 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfiguration {
 
     @Bean
+    PaymentService paymentService(PaymentOutput paymentOutput) {
+        return new PaymentService(paymentOutput);
+    }
+
+    @Bean
     ProductService productService(ProductOutput productOutput) {
         return new ProductService(productOutput);
     }
@@ -19,6 +26,5 @@ public class BeanConfiguration {
     UserService userService(UserOutput userOutput) {
         return new UserService(userOutput);
     }
-
 
 }
