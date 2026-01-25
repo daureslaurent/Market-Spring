@@ -8,6 +8,7 @@ import java.util.UUID;
 public record ProductResponse(
         UUID id,
         String name,
+        String detail,
         String pictureId
 ) {
 }
