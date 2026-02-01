@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: market-spring-config
 data:
-  SPRING_PROFILES_ACTIVE: local
+  SPRING_PROFILES_ACTIVE: local,k8s
   LOG_LEVEL: DEBUG

@@ -18,11 +18,13 @@ image:
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "APP_IMAGE_DOCKER_TAG"
-  probeContext: "/"
+  probeContext: "/api/actuator"
 
 envFrom:
   - configMapRef:
       name: market-spring-config
+  - configMapRef:
+      name: market-spring-config-env
 
 imagePullSecrets:
 #  - name: lda-docker-registry
