@@ -1,4 +1,4 @@
-package lda.services.market.infra.persistence;
+package lda.services.market.infra;
 
 import lda.services.market.domain.payment.port.PaymentOutput;
 import lda.services.market.domain.payment.service.PaymentService;
@@ -6,6 +6,7 @@ import lda.services.market.domain.product.port.ProductOutput;
 import lda.services.market.domain.product.service.ProductService;
 import lda.services.market.domain.user.port.UserOutput;
 import lda.services.market.domain.user.service.UserService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,7 +19,7 @@ public class BeanConfiguration {
     }
 
     @Bean
-    ProductService productService(ProductOutput productOutput) {
+    ProductService productService(@Qualifier("productApiAdapter") ProductOutput productOutput) {
         return new ProductService(productOutput);
     }
 

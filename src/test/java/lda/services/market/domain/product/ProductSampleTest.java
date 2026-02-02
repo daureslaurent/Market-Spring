@@ -2,8 +2,8 @@ package lda.services.market.domain.product;
 
 import lda.services.market.domain.product.model.Product;
 import lda.services.market.domain.product.model.Tag;
-import lda.services.market.infra.persistence.product.entity.ProductEntity;
-import lda.services.market.infra.persistence.product.entity.TagEntity;
+//import lda.services.market.infra.persistence.product.entity.ProductEntity;
+//import lda.services.market.infra.persistence.product.entity.TagEntity;
 
 import java.util.Set;
 import java.util.UUID;
@@ -27,18 +27,18 @@ public class ProductSampleTest {
         );
     }
 
-    public static Set<TagEntity> tagEntity() {
-        return Set.of(
-                TagEntity.builder()
-                        .id(TAG_0_ID)
-                        .name("Tag0")
-                        .build(),
-                TagEntity.builder()
-                        .id(TAG_1_ID)
-                        .name("Tag1")
-                        .build()
-        );
-    }
+//    public static Set<TagEntity> tagEntity() {
+//        return Set.of(
+//                TagEntity.builder()
+//                        .id(TAG_0_ID)
+//                        .name("Tag0")
+//                        .build(),
+//                TagEntity.builder()
+//                        .id(TAG_1_ID)
+//                        .name("Tag1")
+//                        .build()
+//        );
+//    }
 
     public static Product domain() {
         return Product.builder()
@@ -62,17 +62,17 @@ public class ProductSampleTest {
                 .build();
     }
 
-    public static ProductEntity entity() {
-        final var domain = domain();
-        return ProductEntity.builder()
-                .id(domain.id())
-                .name(domain.name())
-                .detail(domain().detail())
-                .pictureId(domain().pictureId())
-                .quantity(domain.quantity())
-                .tags(tagEntity())
-                .build();
-
-    }
+//    public static ProductEntity entity() {
+//        final var domain = domain();
+//        return ProductEntity.builder()
+//                .id(domain.id())
+//                .name(domain.name())
+//                .detail(domain().detail())
+//                .pictureId(domain().pictureId())
+//                .quantity(domain.quantity())
+//                .tags(tagEntity())
+//                .build();
+//
+//    }
 
 }
