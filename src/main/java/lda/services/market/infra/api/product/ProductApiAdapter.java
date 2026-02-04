@@ -43,7 +43,9 @@ public class ProductApiAdapter implements ProductOutput {
     }
 
     @Override
-    public Product save(Product product) {
-        return null;
+    public Product create(Product product) {
+        final var created = apiClient.create(product);
+        return mapper.toDomain(created);
+
     }
 }

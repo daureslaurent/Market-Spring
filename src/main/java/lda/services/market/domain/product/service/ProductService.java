@@ -28,7 +28,7 @@ public class ProductService implements ProductInput {
 
     @Override
     public Product addProduct(Product product) {
-        return productOutput.save(product);
+        return productOutput.create(product);
     }
 
     @Override
@@ -38,6 +38,6 @@ public class ProductService implements ProductInput {
         final var updatedProduct = product.
                 changeQuantity(quantity);
 
-        return productOutput.save(updatedProduct);
+        return productOutput.create(updatedProduct);
     }
 }

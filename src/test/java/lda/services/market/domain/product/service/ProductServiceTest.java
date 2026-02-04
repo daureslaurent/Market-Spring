@@ -74,7 +74,7 @@ class ProductServiceTest {
         final var productReturned = ProductSampleTest.domain();
 
         // Given
-        when(productOutput.save(product))
+        when(productOutput.create(product))
                 .thenReturn(productReturned);
 
         // When
@@ -85,7 +85,7 @@ class ProductServiceTest {
         assertThat(productAdded).isEqualTo(productReturned);
         assertThat(productAdded.id()).isNotNull();
 
-        verify(productOutput).save(product);
+        verify(productOutput).create(product);
     }
 
     @Test
@@ -99,7 +99,7 @@ class ProductServiceTest {
         // Given
         when(productOutput.getById(product.id()))
                 .thenReturn(Optional.of(product));
-        when(productOutput.save(productWanted))
+        when(productOutput.create(productWanted))
                 .thenReturn(productWanted);
 
         // When
@@ -110,28 +110,29 @@ class ProductServiceTest {
         assertThat(productTest).isEqualTo(productWanted);
 
         verify(productOutput).getById(product.id());
-        verify(productOutput).save(productWanted);
+        verify(productOutput).create(productWanted);
     }
 
     @Test
     void updateQuantity_should_throw_when_tooSmall() {
         final var product = ProductSampleTest.domain();
         final var quantity = -5;
+        final var id = product.id();
 
         // Given
-        when(productOutput.getById(product.id()))
+        when(productOutput.getById(id))
                 .thenReturn(Optional.of(product));
 
         // When
         final var throwed = assertThrows(ProductQuantityTooSmallException.class, () ->
-                productService.updateQuantity(product.id(), quantity));
+                productService.updateQuantity(id, quantity));
 
         // Then
         assertThat(throwed).isNotNull();
         assertThat(throwed).isInstanceOf(ProductQuantityTooSmallException.class);
 
-        verify(productOutput).getById(product.id());
-        verify(productOutput, never()).save(any());
+        verify(productOutput).getById(id);
+        verify(productOutput, never()).create(any());
     }
 
 

@@ -11,6 +11,6 @@ public interface ProductOutput {
 
     Page<Product> getByPage(final Pageable page);
     Optional<Product> getById(final UUID id);
-    Product save(final Product product);
+    Product create(final Product product);
 
 }
